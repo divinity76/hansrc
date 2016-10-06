@@ -1,5 +1,5 @@
 # based on debian 9-testing's default user bashrc.
-# accompanied by https://gist.github.com/divinity76/16e8646febb8d421b8cccc33e8ba74c0
+# accompanied by https://github.com/divinity76/bashrc/blob/master/.bash_aliases
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
