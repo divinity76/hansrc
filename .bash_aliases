@@ -1,5 +1,5 @@
 # based on debian 9-testing's default user .bash_aliases
-# accompanied by https://gist.github.com/divinity76/e1e9579e45f539cf22c30d2c8e2bad27
+# accompanied by https://github.com/divinity76/bashrc/blob/master/.bashrc
 alias grep='grep --color=auto'
 #alias fgrep='fgrep --color=auto'
 #alias egrep='egrep --color=auto'
