@@ -44,3 +44,11 @@ isscreen(){
         printf "This is NOT a screen session.\n";
     fi
 }
+alias dropcaches='echo 3 > /proc/sys/vm/drop_caches'
+syncdropcaches(){
+    printf "syncing... ";
+    sync
+    printf "synced. dropping... "
+    echo 3 > /proc/sys/vm/drop_caches
+    printf "dropped.\n"
+}
