@@ -52,3 +52,4 @@ syncdropcaches(){
     echo 3 > /proc/sys/vm/drop_caches
     printf "dropped.\n"
 }
+alias traceroute='traceroute --max-hops=255'
