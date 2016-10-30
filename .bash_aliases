@@ -17,7 +17,7 @@ alias ls='ls --color=auto'
 alias path='echo -e ${PATH//:/\\n}'
 alias dfh='df -h'
 # alias syslog='sudo tail -100f /var/log/syslog'
-alias cpr='rsync -avz --progress'
+alias cpr='rsync -av --progress'
 
 # perform 'ls' after 'cd' if successful.
 cdls() {
