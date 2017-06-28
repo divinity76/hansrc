@@ -53,3 +53,18 @@ syncdropcaches(){
     printf "dropped.\n"
 }
 alias traceroute='traceroute --max-hops=255'
+nginx_reload(){
+  sudo nginx -t
+  RESULT=$?
+  if [ "$RESULT" -ne 0 ]; then
+    echo WARNING: nginx -t failed, will not attempt nginx reload 1>&2
+    return 1
+  fi
+  sudo service nginx reload
+  RESULT=$?
+  if [ "$RESULT" -ne 0 ]; then
+    echo WARNING: nginx -t reported success, yet service nginx reload failed! 1>&2
+    return 1
+  fi
+  echo nginx reloaded successfully.
+}
