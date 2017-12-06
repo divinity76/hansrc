@@ -28,7 +28,17 @@ cdls() {
   fi
 }
 alias cd='cdls'
-alias startvnc='x11vnc -auth /var/run/lightdm/root/:0 -display :0'
+startvnc() {
+        RESULT=$(/etc/init.d/lxdm status 2>&1 | grep -ioe "\-auth [^\s]*")
+        if [ "$?" -ne 0 ]; then
+            RESULT=$(/etc/init.d/lightdm status 2>&1 | grep -ioe "\-auth [^\s]*")
+            if [ "$?" -ne 0 ]; then
+                echo "only lxdm and lightdm supported for now, neither seems to be running, sorry... (please send a bugreport or pull request though)"
+                return 1
+            fi
+        fi
+        command x11vnc -display :0 $RESULT
+}
 # allows `su www-data` to run as /bin/bash , because the default shell is /bin/false, disabling shell access to www-data 
 su() {
     if [[ $@ == "www-data" ]]; then
