@@ -29,9 +29,9 @@ cdls() {
 }
 alias cd='cdls'
 startvnc() {
-        RESULT=$(/etc/init.d/lxdm status 2>&1 | grep -ioe "\-auth [^\s]*")
+        RESULT="$(/etc/init.d/lxdm status 2>&1 | grep -ioe "-auth\s[^ ]*")"
         if [ "$?" -ne 0 ]; then
-            RESULT=$(/etc/init.d/lightdm status 2>&1 | grep -ioe "\-auth [^\s]*")
+            RESULT="$(/etc/init.d/lightdm status 2>&1 | grep -ioe "-auth\s[^ ]*")"
             if [ "$?" -ne 0 ]; then
                 echo "only lxdm and lightdm supported for now, neither seems to be running, sorry... (please send a bugreport or pull request though)"
                 return 1
