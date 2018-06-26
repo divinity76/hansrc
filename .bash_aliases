@@ -63,6 +63,7 @@ syncdropcaches(){
     printf "dropped.\n"
 }
 alias traceroute='traceroute --max-hops=255'
+alias vcat='tail -n +1'
 nginx_reload(){
   sudo nginx -t
   RESULT=$?
