@@ -79,3 +79,5 @@ nginx_reload(){
   fi
   echo nginx reloaded successfully.
 }
+
+alias p8='ping -s 16 8.8.8.8'
