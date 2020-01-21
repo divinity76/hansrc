@@ -81,3 +81,5 @@ nginx_reload(){
 }
 
 alias p8='ping -s 16 8.8.8.8'
+
+alias upgrade='sudo apt update; sudo apt full-upgrade;'
