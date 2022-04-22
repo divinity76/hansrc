@@ -85,3 +85,5 @@ alias p8='ping -s 16 8.8.8.8'
 alias upgrade='sudo apt update; sudo apt full-upgrade;'
 
 alias reset='tput reset'
+# termbin's api is delightfully simple :D
+alias pastebinit = 'nc termbin.com 9999'
