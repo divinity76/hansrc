@@ -10,6 +10,11 @@ case $- in
       *) return;;
 esac
 
+#if LANG isn't set for some reason, default to UTF-8..
+# (IM NOT SURE if this should be done before the interactive check or not?)
+[[ -z "${LANG}" ]] && export LANG='en_US.UTF-8'
+
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
