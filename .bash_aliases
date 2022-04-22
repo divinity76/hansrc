@@ -86,4 +86,4 @@ alias upgrade='sudo apt update; sudo apt full-upgrade;'
 
 alias reset='tput reset'
 # termbin's api is delightfully simple :D
-alias pastebinit = 'nc termbin.com 9999'
+alias pastebinit='nc termbin.com 9999'
