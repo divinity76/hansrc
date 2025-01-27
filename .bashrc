@@ -109,3 +109,10 @@ if [[ ! "$PATH" =~ "$HOME/.local/bin" ]]; then
         export PATH="$HOME/.local/bin:$PATH"
     fi
 fi
+
+# activate virtualenv if it exists and isn't already activated
+if [[ -z "$VIRTUAL_ENV" ]]; then
+    if [[ -f "$HOME/.local/venv/bin/activate" ]]; then
+        VIRTUAL_ENV_DISABLE_PROMPT=1 source "$HOME/.local/venv/bin/activate"
+    fi
+fi
