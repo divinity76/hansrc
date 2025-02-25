@@ -85,5 +85,12 @@ alias p8='ping -s 16 8.8.8.8'
 alias upgrade='sudo apt update; sudo apt full-upgrade;'
 
 alias reset='tput reset'
-# termbin's api is delightfully simple :D
-alias pastebinit='nc termbin.com 9999'
+# termbin's api is delightfully simple :) but it's down :(
+# alias pastebinit='nc termbin.com 9999'
+pastebinit() {
+    if [ $# -eq 0 ]; then
+        curl --http1.1 -s https://share.loltek.net -T -  # Read from stdin
+    else
+        curl --http1.1 -s https://share.loltek.net -T "$@"
+    fi
+}
