@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #if LANG isn't set for some reason, default to UTF-8..
 # (IM NOT SURE if this should be done before the interactive check or not?)
 [[ -z "${LANG}" ]] && export LANG='en_US.UTF-8'
@@ -17,25 +19,25 @@ alias grep='grep --color=auto'
 alias ls='ls --color=auto'
 # perform 'ls' after 'cd' if successful.
 cdls() {
-  builtin cd "$*"
-  RESULT=$?
-  if [ "$RESULT" -eq 0 ]; then
-    ls
-  fi
+    builtin cd "$*"
+    RESULT=$?
+    if [ "$RESULT" -eq 0 ]; then
+        ls
+    fi
 }
 alias cd='cdls'
 startvnc() {
-        RESULT="$(/etc/init.d/lxdm status 2>&1 | grep -ioe "-auth\s[^ ]*")"
+    RESULT="$(/etc/init.d/lxdm status 2>&1 | grep -ioe "-auth\s[^ ]*")"
+    if [ "$?" -ne 0 ]; then
+        RESULT="$(/etc/init.d/lightdm status 2>&1 | grep -ioe "-auth\s[^ ]*")"
         if [ "$?" -ne 0 ]; then
-            RESULT="$(/etc/init.d/lightdm status 2>&1 | grep -ioe "-auth\s[^ ]*")"
-            if [ "$?" -ne 0 ]; then
-                echo "only lxdm and lightdm supported for now, neither seems to be running, sorry... (please send a bugreport or pull request though)"
-                return 1
-            fi
+            echo "only lxdm and lightdm supported for now, neither seems to be running, sorry... (please send a bugreport or pull request though)"
+            return 1
         fi
-        command x11vnc -display :0 $RESULT
+    fi
+    command x11vnc -display :0 $RESULT
 }
-# allows `su www-data` to run as /bin/bash , because the default shell is /bin/false, disabling shell access to www-data 
+# allows `su www-data` to run as /bin/bash , because the default shell is /bin/false, disabling shell access to www-data
 su() {
     if [[ $@ == "www-data" ]]; then
         command su www-data -s /bin/bash
@@ -43,39 +45,38 @@ su() {
         command su "$@"
     fi
 }
-isscreen(){
-    if test -n "$STY"; then 
-        printf "$STY\n"; 
-    else 
-        printf "This is NOT a screen session.\n";
+isscreen() {
+    if test -n "$STY"; then
+        printf "$STY\n"
+    else
+        printf "This is NOT a screen session.\n"
     fi
 }
 alias traceroute='traceroute --max-hops=255'
-nginx_reload(){
-  sudo nginx -t
-  RESULT=$?
-  if [ "$RESULT" -ne 0 ]; then
-    echo WARNING: nginx -t failed, will not attempt nginx reload 1>&2
-    return 1
-  fi
-  sudo service nginx reload
-  RESULT=$?
-  if [ "$RESULT" -ne 0 ]; then
-    echo WARNING: nginx -t reported success, yet service nginx reload failed! 1>&2
-    return 1
-  fi
-  echo nginx reloaded successfully.
+nginx_reload() {
+    sudo nginx -t
+    RESULT=$?
+    if [ "$RESULT" -ne 0 ]; then
+        echo WARNING: nginx -t failed, will not attempt nginx reload 1>&2
+        return 1
+    fi
+    sudo service nginx reload
+    RESULT=$?
+    if [ "$RESULT" -ne 0 ]; then
+        echo WARNING: nginx -t reported success, yet service nginx reload failed! 1>&2
+        return 1
+    fi
+    echo nginx reloaded successfully.
 }
 alias p8='ping -s 16 8.8.8.8'
 
 alias upgrade='sudo apt update; sudo apt full-upgrade;'
 
 alias reset='tput reset'
-# termbin's api is delightfully simple :) but it's down :(
-# alias pastebinit='nc termbin.com 9999'
+
 pastebinit() {
     if [ $# -eq 0 ]; then
-        curl --http1.1 -s https://share.loltek.net -T -  # Read from stdin
+        curl --http1.1 -s https://share.loltek.net -T - # Read from stdin
     else
         curl --http1.1 -s https://share.loltek.net -T "$@"
     fi

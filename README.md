@@ -4,8 +4,6 @@
 to install:
 
 ```bash
-wget 'https://raw.githubusercontent.com/divinity76/bashrc/refs/heads/master/.hansrc' -O ~/.hansrc
-echo "source ~/.hansrc" >> ~/.bashrc
+wget 'https://raw.githubusercontent.com/divinity76/bashrc/refs/heads/master/install.sh' -O- | bash
+source ~/.bashrc
 ```
-
-
