@@ -74,10 +74,12 @@ alias upgrade='sudo apt update; sudo apt full-upgrade;'
 
 alias reset='tput reset'
 
-pastebinit() {
-    if [ $# -eq 0 ]; then
-        curl --http1.1 -s https://share.loltek.net -T - # Read from stdin
-    else
-        curl --http1.1 -s https://share.loltek.net -T "$@"
-    fi
-}
+if ! command -v pastebinit >/dev/null 2>&1; then
+    function pastebinit {
+        if [ $# -eq 0 ]; then
+            curl --http1.1 -s https://share.loltek.net -T - # Read from stdin
+        else
+            curl --http1.1 -s https://share.loltek.net -T "$@"
+        fi
+    }
+fi
